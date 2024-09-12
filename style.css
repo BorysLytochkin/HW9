@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+.div-center{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25%;
+    flex-direction: column;
+}
+.center-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #49af4c;
+    color: rgb(241, 89, 0);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.center-button:hover {
+    background-color: #419445;
+}
+#statusMessage {
+    margin-top: 20px;
+    font-size: 16px;
+}

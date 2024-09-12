@@ -3,7 +3,8 @@
 const toggleButton = document.getElementById('toggleButton');
 const statusMessage = document.getElementById('statusMessage');
 
-let isDarkMode = false;
+let isDarkMode = JSON.parse(localStorage.getItem('isDarkMode')) || false;
+let lastActionTime = localStorage.getItem('lastActionTime') || '';
 
 function getCurrentTime() {
     const now = new Date();
@@ -17,17 +18,27 @@ function getCurrentTime() {
     });
 }
 
-toggleButton.addEventListener('click', () => {
-   
-    isDarkMode = !isDarkMode;
+function updateUI() {
 
     if (isDarkMode) {
         document.body.style.backgroundColor = '#333'; 
         toggleButton.textContent = 'Turn on'; 
-        statusMessage.textContent = `Last turn off: ${getCurrentTime()}`; 
+        statusMessage.textContent = `Last turn off: ${lastActionTime}`; 
     } else {
         document.body.style.backgroundColor = '#f0f0f0'; 
         toggleButton.textContent = 'Turn off'; 
-        statusMessage.textContent = `Last turn on: ${getCurrentTime()}`; 
+        statusMessage.textContent = `Last turn on: ${lastActionTime}`; 
     }
+}
+
+toggleButton.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+
+    lastActionTime = getCurrentTime();
+
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+    localStorage.setItem('lastActionTime', lastActionTime);
+    updateUI();
 });
+
+updateUI();
